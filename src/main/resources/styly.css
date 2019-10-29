@@ -1,0 +1,16 @@
+.kontejner {
+    -fx-background-color: rgba(255,255, 255, 0.4);
+    -fx-padding:  5 0 0 10;
+}
+
+.kontejner:hover {
+    -fx-background-color: rgba(255,255, 255, 0.7);
+}
+
+.nadpis {
+    -fx-font-size: 18;
+}
+
+.velky-nadpis {
+    -fx-font-size: 24;
+}

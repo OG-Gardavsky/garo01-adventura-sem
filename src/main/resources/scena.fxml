@@ -16,6 +16,11 @@
     <ImageView fx:id="obrazekLokace" />
     <BorderPane>
         <top>
+            <MenuBar>
+                <Menu>
+
+                </Menu>
+            </MenuBar>
             <VBox alignment="CENTER" styleClass="kontejner">
                 <MenuBar>
                     <Menu>

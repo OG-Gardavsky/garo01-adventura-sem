@@ -11,6 +11,9 @@ public class Controller {
         this.hra = hra;
         HerniPlan herniPlan = hra.getHerniPlan();
         Prostor aktualniProstor = herniPlan.getAktualniProstor();
+
     }
+
+
 
 }

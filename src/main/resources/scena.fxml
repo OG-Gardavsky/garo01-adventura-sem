@@ -46,23 +46,19 @@
                 <padding>
                     <Insets top="10" bottom="10" left="10" right="10"/>
                 </padding>
-                <!--     Vychody           -->
-                <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
-                    <Label text="Východy" styleClass="nadpis"/>
-                    <VBox fx:id="seznamVychodu"/>
-
-                </VBox>
-
-                <!--     Batoh           -->
-                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="kontejner">
-                <Label text="Batoh" styleClass="nadpis"/>
-                <VBox fx:id="seznamPredmetuVBatohu"/>
 
                 <!--     Predmety           -->
                 <VBox  GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
                     <Label text="Předměty" styleClass="nadpis"/>
                     <VBox fx:id="seznamPredmetuVMistnosti"/>
                 </VBox>
+
+                <!--     Batoh           -->
+                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
+                    <Label text="Batoh" styleClass="nadpis"/>
+                    <VBox fx:id="seznamPredmetuVBatohu"/>
+                </VBox>
+
 
             </GridPane>
         </left>
@@ -78,9 +74,20 @@
                 </columnConstraints>
                 <padding>
                     <Insets top="10" bottom="10" left="10" right="10"/>
+                </padding>
 
-
+                <!--     jít do          -->
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
+                    <Label text="Jít do" styleClass="nadpis"/>
+                    <VBox fx:id="seznamJit"/>
                 </VBox>
+
+                <!--     Plížit se do           -->
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
+                    <Label text="Plížit se do" styleClass="nadpis"/>
+                    <VBox fx:id="seznamPlizit"/>
+                </VBox>
+
             </GridPane>
         </right>
 

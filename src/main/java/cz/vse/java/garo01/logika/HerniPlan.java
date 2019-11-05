@@ -3,7 +3,7 @@ package cz.vse.java.garo01.logika;
 
 /**
  *  Class HerniPlan - třída představující mapu a stav adventury.
- * 
+ *
  *  Tato třída inicializuje prvky ze kterých se hra skládá:
  *  vytváří všechny prostory,
  *  propojuje je vzájemně pomocí východů 
@@ -13,7 +13,7 @@ package cz.vse.java.garo01.logika;
  *@version    pro školní rok 2016/2017
  */
 public class HerniPlan {
-    
+
     private cz.vse.java.garo01.logika.Prostor aktualniProstor;
     private Batoh batoh;
 
@@ -32,8 +32,8 @@ public class HerniPlan {
      */
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
-        cz.vse.java.garo01.logika.Prostor hello = new Prostor("havarovaná_helikoptéra","Havarovaná helikoptéra, která je výchozí lokací příběhu");
-        cz.vse.java.garo01.logika.Prostor horska_stezka = new Prostor("horská_stezka", "Horská stezka, která je jedinou cestou od helikoptéry");
+        Prostor hello = new Prostor("havarovaná_helikoptéra","Havarovaná helikoptéra, která je výchozí lokací příběhu");
+        Prostor horska_stezka = new Prostor("horská_stezka", "Horská stezka, která je jedinou cestou od helikoptéry");
         Prostor propast = new Prostor("propast", "Spadli jste do propasti, a tímto hru prohráli");
         Prostor vysoka_stezka = new Prostor("vysokohorská_cesta","vysokohorská_cesta na které se vyskytují povstalci");
         Prostor udoli = new Prostor("horské_údolí","Horské_údolí, ve kterém se nachází rozzuřený medvěd");
@@ -89,7 +89,7 @@ public class HerniPlan {
         poust.pridejVec(new Vec("kusy_letadla", false));
         zalesneneUdoli.pridejVec(new Vec("krabice_nářadí", true));
     }
-    
+
     /**
      *  Metoda vrací odkaz na aktuální prostor, ve ktetém se hráč právě nachází.
      *
@@ -99,18 +99,18 @@ public class HerniPlan {
     public Batoh getBatoh(){
         return batoh;
     }
-    
+
     public Prostor getAktualniProstor() {
         return aktualniProstor;
     }
-    
+
     /**
      *  Metoda nastaví aktuální prostor, používá se nejčastěji při přechodu mezi prostory
      *
      *@param  prostor nový aktuální prostor
      */
     public void setAktualniProstor(Prostor prostor) {
-       aktualniProstor = prostor;
+        aktualniProstor = prostor;
     }
 
 }

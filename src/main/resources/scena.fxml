@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="cz.vse.java.garo01.logika.Controller"
@@ -17,23 +18,52 @@
     <BorderPane>
         <top>
             <MenuBar>
-                <Menu>
-
+                <Menu text="menu">
+                    <MenuItem text="Nová Hra"/>
+                    <MenuItem text="Nápověda"/>
+                    <MenuItem text="Mapa hry"/>
                 </Menu>
             </MenuBar>
-            <VBox alignment="CENTER" styleClass="kontejner">
-                <MenuBar>
-                    <Menu>
+        </top>
 
-                    </Menu>
-                </MenuBar>
+        <bottom>
+
+            <VBox alignment="CENTER" styleClass="kontejner">
                 <Label fx:id="jmenoLokace" styleClass="velky-nadpis" text="Jmeno lokace"/>
                 <Label fx:id="popisLokace" styleClass="nadpis" text="popis lokace"/>
             </VBox>
-        </top>
+        </bottom>
 
-        <right>
-        </right>
+        <left>
+            <GridPane vgap="10">
+                <rowConstraints>
+                    <RowConstraints percentHeight="33"/>
+                    <RowConstraints percentHeight="33"/>
+                    <RowConstraints percentHeight="33"/>
+                </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="200"/>
+                </columnConstraints>
+                <padding>
+                    <Insets top="10" bottom="10" left="10" right="10"/>
+                </padding>
+                <!--     Vychody           -->
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
+                    <Label text="Východy" styleClass="nadpis"/>
+                    <VBox fx:id="seznamVychodu"/>
+                </VBox>
+                <!--     Predmety           -->
+                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
+                    <Label text="Předměty" styleClass="nadpis"/>
+                    <VBox fx:id="seznamPredmetuVMistnosti"/>
+                </VBox>
+                <!--     Batoh           -->
+                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="kontejner">
+                    <Label text="Batoh" styleClass="nadpis"/>
+                    <VBox fx:id="seznamPredmetuVBatohu"/>
+                </VBox>
+            </GridPane>
+        </left>
 
         <left>
 

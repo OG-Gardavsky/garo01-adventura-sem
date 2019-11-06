@@ -69,6 +69,7 @@ public class HerniPlan {
         zalesneneUdoli.setVychod(poust);
 
         aktualniProstor = hello;  // hra začíná v helikoptéře
+        //aktualniProstor = poust;
 
         hello.pridejVec(new Vec("cihlička_zlata", true));
         hello.pridejVec(new Vec("kanistr_paliva", true));

@@ -16,6 +16,8 @@ public class Controller {
     @FXML
     private VBox seznamPredmetuVBatohu;
     @FXML
+    private Label sysHlaska;
+    @FXML
     private Label jmenoLokace;
     @FXML
     private Label popisLokace;
@@ -48,6 +50,7 @@ public class Controller {
     }
 
 
+
     private void pridejPredmety(Prostor prostor) {
         seznamPredmetuVMistnosti.getChildren().clear();
 
@@ -61,11 +64,24 @@ public class Controller {
         seznamPredmetuVMistnosti.getChildren().add(nazevVeci);
         nazevVeci.setOnMouseClicked(event -> {
             if (vec.isPrenositelna()) {
+
                 hra.zpracujPrikaz("seber " + vec.getNazev());
                 Label vecVBatohu = new Label(vec.getNazev());
-                seznamPredmetuVBatohu.getChildren().add(vecVBatohu);
-                seznamPredmetuVMistnosti.getChildren().remove(nazevVeci);
-                System.out.println(hra.zpracujPrikaz("vypiš_batoh"));
+                String hlaskaPrikazu = hra.zpracujPrikaz("seber " + vec.getNazev());
+        //System.out.println(hlaskaPrikazu);
+                Boolean jePlny = false;
+
+                if (hlaskaPrikazu.equals("batoh je plný, nelze nic přidat")){
+                    jePlny = true;
+                }
+                if (jePlny == false){
+                    sysHlaska.setText("");
+                    seznamPredmetuVBatohu.getChildren().add(vecVBatohu);
+                    seznamPredmetuVMistnosti.getChildren().remove(nazevVeci);
+        //System.out.println(hra.zpracujPrikaz("vypiš_batoh"));
+                } else {
+                   // sysHlaska.setText(hlaskaPrikazu);
+                }
 
                 vecVBatohu.setOnMouseClicked(event1 -> {
                     hra.zpracujPrikaz("vyhoď "+vec.getNazev());

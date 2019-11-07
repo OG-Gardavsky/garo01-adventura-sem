@@ -47,13 +47,14 @@ public class Controller {
         obrazekLokace.setImage(image);
 
         jmenoLokace.setText(prostor.getNazev());
-        popisLokace.setText(prostor.dlouhyPopis());
+        popisLokace.setText(prostor.getPopis());
 
         pridejPredmety(prostor);
         prikazJit(prostor);
     System.out.println(hra.konecHry());
         if (hra.konecHry()){
-            Platform.exit();
+            popisLokace.setText(hlaskaPrikazu);
+            //Platform.exit();
         }
     }
 
@@ -74,6 +75,7 @@ public class Controller {
 
     private void prikazJit(Prostor prostor) {
         seznamJit.getChildren().clear();
+        seznamPlizit.getChildren().clear();
         for (Prostor p : prostor.getVychody()) {
             HBox vychod = new HBox();
             vychod.setSpacing(10);
@@ -82,8 +84,10 @@ public class Controller {
             vychod.getChildren().addAll( nazevProstoru);
 
             seznamJit.getChildren().add(vychod);
+            seznamPlizit.getChildren().clear();
             vychod.setOnMouseClicked(event -> {
                 zmenProstorJit(p);
+                zmenProstorPlizit(p);
             });
         }
     }

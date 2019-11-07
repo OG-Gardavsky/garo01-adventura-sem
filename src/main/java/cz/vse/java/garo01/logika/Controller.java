@@ -1,9 +1,11 @@
 package cz.vse.java.garo01.logika;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.FileInputStream;
@@ -33,12 +35,31 @@ public class Controller {
         this.hra = hra;
         HerniPlan herniPlan = hra.getHerniPlan();
         Prostor aktualniProstor = herniPlan.getAktualniProstor();
-        zmenProstor(aktualniProstor);
+        zmenProstorJit(aktualniProstor);
+        zmenProstorPlizit(aktualniProstor);
     }
 
-    private void zmenProstor(Prostor prostor){
 
-        hra.zpracujPrikaz("jdi " + prostor.getNazev());
+    private void zmenProstorJit(Prostor prostor){
+        String hlaskaPrikazu =  hra.zpracujPrikaz("jdi " + prostor.getNazev());
+
+        Image image = new Image(getClass().getResourceAsStream("/" + prostor.getNazev() + ".jpg"));
+        obrazekLokace.setImage(image);
+
+        jmenoLokace.setText(prostor.getNazev());
+        popisLokace.setText(prostor.dlouhyPopis());
+
+        pridejPredmety(prostor);
+        prikazJit(prostor);
+    System.out.println(hra.konecHry());
+        if (hra.konecHry()){
+            Platform.exit();
+        }
+    }
+
+    private void zmenProstorPlizit(Prostor prostor){
+
+        hra.zpracujPrikaz("plížit " + prostor.getNazev());
 
         Image image = new Image(getClass().getResourceAsStream("/" + prostor.getNazev() + ".jpg"));
         obrazekLokace.setImage(image);
@@ -47,8 +68,41 @@ public class Controller {
         popisLokace.setText(prostor.getPopis());
 
         pridejPredmety(prostor);
+        prikazPlizit(prostor);
+    System.out.println(hra.konecHry());;
     }
 
+    private void prikazJit(Prostor prostor) {
+        seznamJit.getChildren().clear();
+        for (Prostor p : prostor.getVychody()) {
+            HBox vychod = new HBox();
+            vychod.setSpacing(10);
+            Label nazevProstoru = new Label(p.getNazev());
+
+            vychod.getChildren().addAll( nazevProstoru);
+
+            seznamJit.getChildren().add(vychod);
+            vychod.setOnMouseClicked(event -> {
+                zmenProstorJit(p);
+            });
+        }
+    }
+
+    private void prikazPlizit(Prostor prostor) {
+        seznamPlizit.getChildren().clear();
+        for (Prostor p : prostor.getVychody()) {
+            HBox vychod = new HBox();
+            vychod.setSpacing(10);
+            Label nazevProstoru = new Label(p.getNazev());
+
+            vychod.getChildren().addAll( nazevProstoru);
+
+            seznamPlizit.getChildren().add(vychod);
+            vychod.setOnMouseClicked(event -> {
+                zmenProstorPlizit(p);
+            });
+        }
+    }
 
 
     private void pridejPredmety(Prostor prostor) {

@@ -42,7 +42,10 @@ public class PrikazPlizit implements IPrikaz {
 
         if (sousedniProstor == null) {
             return "Tam se odsud plížit nedá!";
-        } else if (sousedniProstor.getNazev().equals("vysokohorská_cesta")) {
+        } else if (sousedniProstor.getNazev().equals("propast")) {
+            hra.setKonecHry(true);
+            return sousedniProstor.getPopis();
+        }else if (sousedniProstor.getNazev().equals("vysokohorská_cesta")) {
             plan.setAktualniProstor(sousedniProstor);
             return "proplížili jste se kolem povstalců, proti, kterým bojujete, máte štěstí, že si vás nevšimli, jsou ve značné početní převaze" + "\n" + sousedniProstor.popisVychodu() + "\n" + sousedniProstor.getVeci();
 

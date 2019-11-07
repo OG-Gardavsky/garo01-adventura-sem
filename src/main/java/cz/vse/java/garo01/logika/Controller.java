@@ -51,7 +51,7 @@ public class Controller {
 
         pridejPredmety(prostor);
         prikazJit(prostor);
-    System.out.println(hra.konecHry());
+System.out.println(hra.konecHry());
         if (hra.konecHry()){
             popisLokace.setText(hlaskaPrikazu);
             //Platform.exit();
@@ -70,12 +70,12 @@ public class Controller {
 
         pridejPredmety(prostor);
         prikazPlizit(prostor);
-    System.out.println(hra.konecHry());;
+System.out.println(hra.konecHry());;
     }
 
     private void prikazJit(Prostor prostor) {
         seznamJit.getChildren().clear();
-        seznamPlizit.getChildren().clear();
+System.out.println(prostor.getNazev());
         for (Prostor p : prostor.getVychody()) {
             HBox vychod = new HBox();
             vychod.setSpacing(10);
@@ -84,7 +84,6 @@ public class Controller {
             vychod.getChildren().addAll( nazevProstoru);
 
             seznamJit.getChildren().add(vychod);
-            seznamPlizit.getChildren().clear();
             vychod.setOnMouseClicked(event -> {
                 zmenProstorJit(p);
                 zmenProstorPlizit(p);
@@ -94,6 +93,7 @@ public class Controller {
 
     private void prikazPlizit(Prostor prostor) {
         seznamPlizit.getChildren().clear();
+System.out.println(prostor.getNazev());
         for (Prostor p : prostor.getVychody()) {
             HBox vychod = new HBox();
             vychod.setSpacing(10);
@@ -103,7 +103,9 @@ public class Controller {
 
             seznamPlizit.getChildren().add(vychod);
             vychod.setOnMouseClicked(event -> {
+                zmenProstorJit(p);
                 zmenProstorPlizit(p);
+
             });
         }
     }
@@ -126,7 +128,6 @@ public class Controller {
                 hra.zpracujPrikaz("seber " + vec.getNazev());
                 Label vecVBatohu = new Label(vec.getNazev());
                 String hlaskaPrikazu = hra.zpracujPrikaz("seber " + vec.getNazev());
-        //System.out.println(hlaskaPrikazu);
                 Boolean jePlny = false;
 
                 if (hlaskaPrikazu.equals("batoh je plný, nelze nic přidat")){

@@ -80,13 +80,13 @@
                 <!--     jít do          -->
                 <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
                     <Label text="Jít do" styleClass="nadpis"/>
-                    <VBox fx:id="seznamJit"/>
+                    <VBox fx:id="seznamVychodu"/>
                 </VBox>
 
-                <!--     Plížit se do           -->
-                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner" disable="true">
-                    <Label text="Plížit se do" styleClass="nadpis"/>
-                    <VBox fx:id="seznamPlizit"/>
+                <!--     odjet           -->
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner" visible="true">
+                    <Label text="Odjet" styleClass="nadpis"/>
+                    <VBox fx:id="odjetButton"/>
                 </VBox>
 
             </GridPane>

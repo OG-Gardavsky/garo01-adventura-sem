@@ -44,19 +44,22 @@ public class PrikazPlizit implements IPrikaz {
             return "Tam se odsud plížit nedá!";
         } else if (sousedniProstor.getNazev().equals("propast")) {
             hra.setKonecHry(true);
+            //return sousedniProstor.getPopis();
             return sousedniProstor.getPopis();
-        }else if (sousedniProstor.getNazev().equals("vysokohorská_cesta")) {
+        }
+        else if (sousedniProstor.getNazev().equals("vysokohorská_cesta")) {
             plan.setAktualniProstor(sousedniProstor);
             return "proplížili jste se kolem povstalců, proti, kterým bojujete, máte štěstí, že si vás nevšimli, jsou ve značné početní převaze" + "\n" + sousedniProstor.popisVychodu() + "\n" + sousedniProstor.getVeci();
-
-        }else if (sousedniProstor.getNazev().equals("horské_údolí")){   plan.setAktualniProstor(sousedniProstor);
+        }
+        else if (sousedniProstor.getNazev().equals("horské_údolí")){
+            plan.setAktualniProstor(sousedniProstor);
             return "proplížili jste se kolem rozzuřeného medvěda, který vypadá hladově a setkání s ním byste nepřežili" + "\n" + sousedniProstor.popisVychodu();
-
-        }else if (plan.getAktualniProstor().getNazev().equals("poušť") && !plan.getBatoh().obsahujeVec("čutora_vody")){
+        }
+        else if (sousedniProstor.getNazev().equals("poušť") && !plan.getBatoh().obsahujeVec("čutora_vody")){
             hra.setKonecHry(true);
             return "Vydali jste se do pouště bez vody, po pár kilometrech úmorného vedra umíráte na žízeň";
-
-        } else {
+        }
+        else {
             plan.setAktualniProstor(sousedniProstor);
             return sousedniProstor.dlouhyPopis(); 
         }

@@ -11,7 +11,8 @@ import javafx.scene.layout.VBox;
 
 
 public class Controller {
-
+    @FXML
+    private VBox odjetButton;
     @FXML
     private VBox seznamPredmetuVMistnosti;
     @FXML
@@ -23,7 +24,7 @@ public class Controller {
     @FXML
     private Label popisLokace;
     @FXML
-    private VBox seznamJit;
+    private VBox seznamVychodu;
     private IHra hra;
     @FXML
     private ImageView obrazekLokace;
@@ -38,8 +39,6 @@ public class Controller {
 
     private void zmenProstor(Prostor prostor){
         String hlaskaPrikazu =  hra.zpracujPrikaz("plížit " + prostor.getNazev());
-        System.out.println(" ");
-        System.out.println(hra.konecHry());
 
         Image image = new Image(getClass().getResourceAsStream("/" + prostor.getNazev() + ".jpg"));
         obrazekLokace.setImage(image);
@@ -47,18 +46,23 @@ public class Controller {
         jmenoLokace.setText(prostor.getNazev());
         popisLokace.setText(prostor.getPopis());
 
-        pridejPredmety(prostor);
-        pridejVychody(prostor);
-
-        if (hra.konecHry()){
-            popisLokace.setText(hlaskaPrikazu);
-            Platform.exit();
+        if (!hra.konecHry()){
+            pridejPredmety(prostor);
+            pridejVychody(prostor);
+        } else {
+            seznamVychodu.getChildren().clear();
+            seznamPredmetuVBatohu.getChildren().clear();
+            seznamPredmetuVMistnosti.getChildren().clear();
+            sysHlaska.setText(hlaskaPrikazu);
+            popisLokace.setText(hra.vratEpilog());
+            //Platform.exit();
         }
+
     }
     
 
     private void pridejVychody(Prostor prostor) {
-        seznamJit.getChildren().clear();
+        seznamVychodu.getChildren().clear();
 System.out.println(prostor.getNazev());
 System.out.println(hra.konecHry());
         for (Prostor p : prostor.getVychody()) {
@@ -68,9 +72,8 @@ System.out.println(hra.konecHry());
 
             vychod.getChildren().addAll( nazevProstoru);
 
-            seznamJit.getChildren().add(vychod);
+            seznamVychodu.getChildren().add(vychod);
             vychod.setOnMouseClicked(event -> {
-//                System.out.println(hra.konecHry());
                 zmenProstor(p);
             });
         }

@@ -29,9 +29,9 @@
         <bottom>
 
             <VBox alignment="CENTER" styleClass="kontejner">
-                <Label fx:id="sysHlaska" styleClass="nadpis"/>
                 <Label fx:id="jmenoLokace" styleClass="velky-nadpis" text="Jmeno lokace"/>
                 <Label fx:id="popisLokace" styleClass="nadpis" text="popis lokace"/>
+                <Label fx:id="sysHlaska" styleClass="nadpis"/>
             </VBox>
         </bottom>
 

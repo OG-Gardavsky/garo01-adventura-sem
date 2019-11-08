@@ -53,8 +53,8 @@ public class Controller {
             seznamVychodu.getChildren().clear();
             seznamPredmetuVBatohu.getChildren().clear();
             seznamPredmetuVMistnosti.getChildren().clear();
-            sysHlaska.setText(hlaskaPrikazu);
-            popisLokace.setText(hra.vratEpilog());
+            sysHlaska.setText(hra.vratEpilog());
+            popisLokace.setText(hlaskaPrikazu);
             //Platform.exit();
         }
 

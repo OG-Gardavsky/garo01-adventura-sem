@@ -4,6 +4,7 @@ package cz.vse.java.garo01.logika;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -11,6 +12,12 @@ import javafx.scene.layout.VBox;
 
 
 public class Controller {
+    @FXML
+    private MenuItem novaHra;
+    @FXML
+    private MenuItem napoveda;
+    @FXML
+    private MenuItem mapa;
     @FXML
     private Label odjetLabel;
     @FXML
@@ -33,6 +40,7 @@ public class Controller {
 
     public void setHra(IHra hra){
         this.hra = hra;
+        seznamPredmetuVBatohu.getChildren().clear();
         HerniPlan herniPlan = hra.getHerniPlan();
         Prostor aktualniProstor = herniPlan.getAktualniProstor();
         zmenProstor(aktualniProstor);
@@ -52,10 +60,19 @@ public class Controller {
             pridejPredmety(prostor);
             pridejVychody(prostor);
             odjetController(prostor);
+            menuListener();
         } else {
             ukonciHru(hlaskaPrikazu);
-            //Platform.exit();
         }
+
+    }
+
+    private void menuListener(){
+        novaHra.setOnAction( event -> {
+            Hra novaHra = new Hra();
+            setHra(novaHra);
+        });
+
 
     }
     

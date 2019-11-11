@@ -53,11 +53,7 @@ public class Controller {
             pridejVychody(prostor);
             odjetController(prostor);
         } else {
-            seznamVychodu.getChildren().clear();
-            seznamPredmetuVBatohu.getChildren().clear();
-            seznamPredmetuVMistnosti.getChildren().clear();
-            sysHlaska.setText(hra.vratEpilog());
-            popisLokace.setText(hlaskaPrikazu);
+            ukonciHru(hlaskaPrikazu);
             //Platform.exit();
         }
 
@@ -81,17 +77,14 @@ public class Controller {
     }
     
     private void odjetController(Prostor prostor){
-//        if (prostor.getNazev().equals("stará_V3S")) {
-        if (prostor.getNazev().equals("havarovaná_helikoptéra")) {
-//            odjetVbox.setOpacity(0.7);
-            //Label odjetTlacitko = new Label("Odjet");
-//            odjetVbox.getChildren().add(odjetTlacitko);
-
+        if (prostor.getNazev().equals("stará_V3S")) {
+//        if (prostor.getNazev().equals("havarovaná_helikoptéra")) {
             odjetLabel.setText("Odjet");
+
             odjetLabel.setOnMouseClicked(event -> {
-                String hlaskaPrikaz = hra.zpracujPrikaz("odjet");
-                System.out.println(hlaskaPrikaz);
-                sysHlaska.setText(hlaskaPrikaz);
+                String hlaskaPrikazu = hra.zpracujPrikaz("odjet");
+                System.out.println(hra.konecHry());
+                ukonciHru(hlaskaPrikazu);
             });
         }
     }
@@ -130,6 +123,14 @@ public class Controller {
                 });
             }
         });
+    }
+
+    private void ukonciHru(String hlaskaPrikazu){
+        seznamVychodu.getChildren().clear();
+        seznamPredmetuVBatohu.getChildren().clear();
+        seznamPredmetuVMistnosti.getChildren().clear();
+        sysHlaska.setText(hra.vratEpilog());
+        popisLokace.setText(hlaskaPrikazu);
     }
 
 

@@ -12,7 +12,9 @@ import javafx.scene.layout.VBox;
 
 public class Controller {
     @FXML
-    private VBox odjetButton;
+    private Label odjetLabel;
+    @FXML
+    private VBox odjetVbox;
     @FXML
     private VBox seznamPredmetuVMistnosti;
     @FXML
@@ -49,6 +51,7 @@ public class Controller {
         if (!hra.konecHry()){
             pridejPredmety(prostor);
             pridejVychody(prostor);
+            odjetController(prostor);
         } else {
             seznamVychodu.getChildren().clear();
             seznamPredmetuVBatohu.getChildren().clear();
@@ -63,8 +66,6 @@ public class Controller {
 
     private void pridejVychody(Prostor prostor) {
         seznamVychodu.getChildren().clear();
-System.out.println(prostor.getNazev());
-System.out.println(hra.konecHry());
         for (Prostor p : prostor.getVychody()) {
             HBox vychod = new HBox();
             vychod.setSpacing(10);
@@ -79,7 +80,21 @@ System.out.println(hra.konecHry());
         }
     }
     
+    private void odjetController(Prostor prostor){
+//        if (prostor.getNazev().equals("stará_V3S")) {
+        if (prostor.getNazev().equals("havarovaná_helikoptéra")) {
+//            odjetVbox.setOpacity(0.7);
+            //Label odjetTlacitko = new Label("Odjet");
+//            odjetVbox.getChildren().add(odjetTlacitko);
 
+            odjetLabel.setText("Odjet");
+            odjetLabel.setOnMouseClicked(event -> {
+                String hlaskaPrikaz = hra.zpracujPrikaz("odjet");
+                System.out.println(hlaskaPrikaz);
+                sysHlaska.setText(hlaskaPrikaz);
+            });
+        }
+    }
 
     private void pridejPredmety(Prostor prostor) {
         seznamPredmetuVMistnosti.getChildren().clear();
@@ -107,15 +122,10 @@ System.out.println(hra.konecHry());
                     sysHlaska.setText("");
                     seznamPredmetuVBatohu.getChildren().add(vecVBatohu);
                     seznamPredmetuVMistnosti.getChildren().remove(nazevVeci);
-        //System.out.println(hra.zpracujPrikaz("vypiš_batoh"));
-                } else {
-                   // sysHlaska.setText(hlaskaPrikazu);
                 }
-
                 vecVBatohu.setOnMouseClicked(event1 -> {
                     hra.zpracujPrikaz("vyhoď "+vec.getNazev());
                     seznamPredmetuVBatohu.getChildren().remove(vecVBatohu);
-                    System.out.println(hra.zpracujPrikaz("vypiš_batoh"));
                     pridejPredmetDoMistnosti(vec);
                 });
             }

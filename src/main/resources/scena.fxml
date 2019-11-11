@@ -27,7 +27,6 @@
         </top>
 
         <bottom>
-
             <VBox alignment="CENTER" styleClass="kontejner">
                 <Label fx:id="jmenoLokace" styleClass="velky-nadpis" text="Jmeno lokace"/>
                 <Label fx:id="popisLokace" styleClass="nadpis" text="popis lokace"/>
@@ -49,18 +48,16 @@
                 </padding>
 
                 <!--     Predmety           -->
-                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
+                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
                     <Label text="Předměty" styleClass="nadpis"/>
                     <VBox fx:id="seznamPredmetuVMistnosti"/>
                 </VBox>
 
                 <!--     Batoh           -->
-                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
+                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
                     <Label text="Batoh" styleClass="nadpis"/>
                     <VBox fx:id="seznamPredmetuVBatohu"/>
                 </VBox>
-
-
             </GridPane>
         </left>
 
@@ -84,10 +81,11 @@
                 </VBox>
 
                 <!--     odjet           -->
-                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner" visible="true">
-                    <Label text="Odjet" styleClass="nadpis"/>
-                    <VBox fx:id="odjetButton"/>
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
+                    <VBox fx:id="odjetVbox"/>
+                    <Label fx:id="odjetLabel" styleClass="velky-nadpis"></Label>
                 </VBox>
+
 
             </GridPane>
         </right>

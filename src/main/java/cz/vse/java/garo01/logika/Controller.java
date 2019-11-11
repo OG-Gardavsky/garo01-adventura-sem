@@ -1,14 +1,23 @@
 package cz.vse.java.garo01.logika;
 
+/**
+ * Tato třídá slouží k ovládání grafické verze jednoduché grafické adventury
+ * toto rozšíření bylo vytvořeno v akademickém roce zimním semestru 2019 pro předmět 4IT115
+ * část kódu je převzata ze cvičení od pana Růžičky
+ * @author: Ondřej Gardavský
+ */
 
-import javafx.application.Platform;
+
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 public class Controller {
@@ -42,11 +51,15 @@ public class Controller {
         this.hra = hra;
         seznamPredmetuVBatohu.getChildren().clear();
         HerniPlan herniPlan = hra.getHerniPlan();
+        odjetLabel.setText("");
         Prostor aktualniProstor = herniPlan.getAktualniProstor();
         zmenProstor(aktualniProstor);
     }
 
-
+    /**
+     * Metoda měmní prostor v grafickém rozhraní
+     * @param prostor
+     */
     private void zmenProstor(Prostor prostor){
         String hlaskaPrikazu =  hra.zpracujPrikaz("plížit " + prostor.getNazev());
 
@@ -55,7 +68,11 @@ public class Controller {
 
         jmenoLokace.setText(prostor.getNazev());
         popisLokace.setText(prostor.getPopis());
+        sysHlaska.setText("");
 
+        if (!prostor.getNazev().equals("stará_V3S")){
+            odjetLabel.setText("");
+        }
         if (!hra.konecHry()){
             pridejPredmety(prostor);
             pridejVychody(prostor);
@@ -67,16 +84,40 @@ public class Controller {
 
     }
 
+    /**
+     * metoda obstarává kliknutí na jednotlivá tlačítka v menu
+     */
     private void menuListener(){
         novaHra.setOnAction( event -> {
             Hra novaHra = new Hra();
             setHra(novaHra);
         });
 
+        napoveda.setOnAction(event -> {
+            Stage stage = new Stage();
+            stage.setTitle("Nápověda");
+            StackPane root = new StackPane();
+            String textNapovedy = hra.zpracujPrikaz("nápověda");
+            Label labelNapovedy = new Label(textNapovedy);
+            root.getChildren().add(labelNapovedy);
+            stage.setScene(new Scene(root, 1023, 576));
+            stage.show();
+        });
 
+        mapa.setOnAction(event -> {
+            Stage stage = new Stage();
+            Image image = new Image(getClass().getResourceAsStream("mapa.png"));
+            ImageView mapa = new ImageView();
+            mapa.setImage(image);
+
+            stage.show();
+        });
     }
-    
 
+    /***
+     * metoda přidá předměty do místnosti v grafickém rozhraní
+     * @param prostor
+     */
     private void pridejVychody(Prostor prostor) {
         seznamVychodu.getChildren().clear();
         for (Prostor p : prostor.getVychody()) {
@@ -92,20 +133,31 @@ public class Controller {
             });
         }
     }
-    
+
+    /**
+     * Metoda umožní odjet z finální lokace a tím ukončít hru v grafickém rozhraní
+     * @param prostor
+     */
     private void odjetController(Prostor prostor){
         if (prostor.getNazev().equals("stará_V3S")) {
-//        if (prostor.getNazev().equals("havarovaná_helikoptéra")) {
             odjetLabel.setText("Odjet");
 
             odjetLabel.setOnMouseClicked(event -> {
                 String hlaskaPrikazu = hra.zpracujPrikaz("odjet");
                 System.out.println(hra.konecHry());
-                ukonciHru(hlaskaPrikazu);
+                if (hra.konecHry() == true){
+                    ukonciHru(hlaskaPrikazu);
+                } else {
+                    sysHlaska.setText(hlaskaPrikazu);
+                }
             });
         }
     }
 
+    /**
+     * Metoda pomocí metody pridejPredmetDoMistnosti přidá předměty do místnosti v grafickém rozhraní
+     * @param prostor
+     */
     private void pridejPredmety(Prostor prostor) {
         seznamPredmetuVMistnosti.getChildren().clear();
 
@@ -114,6 +166,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Metoda přidá věci do místnosti
+     * @param vec
+     */
     private void pridejPredmetDoMistnosti(Vec vec) {
         Label nazevVeci = new Label(vec.getNazev());
         seznamPredmetuVMistnosti.getChildren().add(nazevVeci);
@@ -129,7 +185,6 @@ public class Controller {
                     jePlny = true;
                 }
                 if (jePlny == false){
-                    sysHlaska.setText("");
                     seznamPredmetuVBatohu.getChildren().add(vecVBatohu);
                     seznamPredmetuVMistnosti.getChildren().remove(nazevVeci);
                 }
@@ -142,6 +197,10 @@ public class Controller {
         });
     }
 
+    /**
+     * metoda ukončí hru z pohledu grafické nádstavby
+     * @param hlaskaPrikazu
+     */
     private void ukonciHru(String hlaskaPrikazu){
         seznamVychodu.getChildren().clear();
         seznamPredmetuVBatohu.getChildren().clear();

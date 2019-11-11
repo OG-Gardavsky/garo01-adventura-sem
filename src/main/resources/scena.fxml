@@ -22,6 +22,7 @@
                     <MenuItem fx:id="novaHra" text="Nová Hra"/>
                     <MenuItem fx:id="napoveda" text="Nápověda"/>
                     <MenuItem fx:id="mapa" text="Mapa hry"/>
+                    <MenuItem fx:id="uvitacipolozka" text="Uvítání"/>
                 </Menu>
             </MenuBar>
         </top>

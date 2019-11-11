@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 
 public class Controller {
     @FXML
+    private MenuItem uvitacipolozka;
+    @FXML
     private MenuItem novaHra;
     @FXML
     private MenuItem napoveda;
@@ -54,6 +56,7 @@ public class Controller {
         odjetLabel.setText("");
         Prostor aktualniProstor = herniPlan.getAktualniProstor();
         zmenProstor(aktualniProstor);
+        vypisUvitaciOkno();
     }
 
     /**
@@ -76,8 +79,8 @@ public class Controller {
         if (!hra.konecHry()){
             pridejPredmety(prostor);
             pridejVychody(prostor);
-            odjetController(prostor);
             menuListener();
+            odjetController(prostor);
         } else {
             ukonciHru(hlaskaPrikazu);
         }
@@ -100,17 +103,21 @@ public class Controller {
             String textNapovedy = hra.zpracujPrikaz("nápověda");
             Label labelNapovedy = new Label(textNapovedy);
             root.getChildren().add(labelNapovedy);
-            stage.setScene(new Scene(root, 1023, 576));
+            stage.setScene(new Scene(root, 854, 480));
             stage.show();
         });
 
         mapa.setOnAction(event -> {
             Stage stage = new Stage();
-            Image image = new Image(getClass().getResourceAsStream("mapa.png"));
+            Image image = new Image(getClass().getResourceAsStream("/mapa.png"));
             ImageView mapa = new ImageView();
             mapa.setImage(image);
 
             stage.show();
+        });
+
+        uvitacipolozka.setOnAction(event -> {
+            vypisUvitaciOkno();
         });
     }
 
@@ -195,6 +202,16 @@ public class Controller {
                 });
             }
         });
+    }
+
+    private void vypisUvitaciOkno(){
+        Stage stage = new Stage();
+        stage.setTitle("Uvítání");
+        StackPane root = new StackPane();
+        Label labelUvitani = new Label(hra.vratUvitani());
+        root.getChildren().add(labelUvitani);
+        stage.setScene(new Scene(root, 854, 360));
+        stage.show();
     }
 
     /**

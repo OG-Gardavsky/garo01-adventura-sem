@@ -208,7 +208,7 @@ public class Controller {
 
         HBox vecBox = new HBox();
         vecBox.setSpacing(15);
-        vecBox.setPadding(new Insets(10, 2, 10, 0));
+        vecBox.setPadding(new Insets(2, 2, 10, 0));
 
         ImageView obrazekVeci = new ImageView();
 
@@ -223,11 +223,11 @@ public class Controller {
         seznamPredmetuVMistnosti.getChildren().add(vecBox);
 
         
-        nazevVeci.setOnMouseClicked(event -> {
+        vecBox.setOnMouseClicked(event -> {
             if (vec.isPrenositelna()) {
 
                 String hlaskaPrikazu = hra.zpracujPrikaz("seber " + vec.getNazev());
-                Label vecVBatohu = new Label(vec.getNazev());
+                HBox batohBox = vecBox;
 
                 Boolean jePlny = false;
 
@@ -236,13 +236,13 @@ public class Controller {
                     sysHlaska.setText(hlaskaPrikazu);
                 }
                 if (jePlny == false){
-                    seznamPredmetuVBatohu.getChildren().add(vecVBatohu);
-                    seznamPredmetuVMistnosti.getChildren().remove(nazevVeci);
+                    seznamPredmetuVBatohu.getChildren().add(batohBox);
+                    seznamPredmetuVMistnosti.getChildren().remove(batohBox);
                 }
-                vecVBatohu.setOnMouseClicked(event1 -> {
+                batohBox.setOnMouseClicked(event1 -> {
                     sysHlaska.setText("");
                     hra.zpracujPrikaz("vyhoď "+vec.getNazev());
-                    seznamPredmetuVBatohu.getChildren().remove(vecVBatohu);
+                    seznamPredmetuVBatohu.getChildren().remove(batohBox);
                     pridejPredmetDoMistnosti(vec);
                 });
             }

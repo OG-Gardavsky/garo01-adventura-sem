@@ -23,6 +23,7 @@
                     <MenuItem fx:id="napoveda" text="Nápověda"/>
                     <MenuItem fx:id="mapa" text="Mapa hry"/>
                     <MenuItem fx:id="uvitacipolozka" text="Uvítání"/>
+                    <MenuItem fx:id="testHTml" text="test HML"/>
                 </Menu>
             </MenuBar>
         </top>
@@ -69,7 +70,7 @@
                     <RowConstraints percentHeight="50"/>
                 </rowConstraints>
                 <columnConstraints>
-                    <ColumnConstraints prefWidth="200"/>
+                    <ColumnConstraints prefWidth="250"/>
                 </columnConstraints>
                 <padding>
                     <Insets top="10" bottom="10" left="10" right="10"/>

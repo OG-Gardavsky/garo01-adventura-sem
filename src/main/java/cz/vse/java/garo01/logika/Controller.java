@@ -9,6 +9,7 @@ package cz.vse.java.garo01.logika;
 
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -21,7 +22,8 @@ import javafx.stage.Stage;
 
 
 public class Controller {
-
+    @FXML
+    private MenuItem testHTml;
     @FXML
     private MenuItem uvitacipolozka;
     @FXML
@@ -49,6 +51,10 @@ public class Controller {
     private IHra hra;
     @FXML
     private ImageView obrazekLokace;
+
+    public static final int SIRKA_IKONY = 45;
+    public static final int VYSKA_IKONY = 30;
+
 
     public void setHra(IHra hra){
         this.hra = hra;
@@ -109,6 +115,14 @@ public class Controller {
             stage.show();
         });
 
+//        testHTml.setOnAction( event -> {
+//            Stage stage = new Stage();
+//            stage.setTitle("Nápověda");
+//            StackPane root = new StackPane();
+//
+//
+//        });
+
         mapa.setOnAction(event -> {
             Stage stage = new Stage();
             Image image = new Image(getClass().getResourceAsStream("/mapa.png"));
@@ -131,10 +145,17 @@ public class Controller {
         seznamVychodu.getChildren().clear();
         for (Prostor p : prostor.getVychody()) {
             HBox vychod = new HBox();
-            vychod.setSpacing(10);
+            vychod.setSpacing(15);
+            vychod.setPadding(new Insets(10, 2, 10, 0));
             Label nazevProstoru = new Label(p.getNazev());
 
-            vychod.getChildren().addAll( nazevProstoru);
+            ImageView obrazekVchodu = new ImageView();
+            Image vychodImage = new Image(getClass().getClassLoader().getResourceAsStream("\\" + p.getNazev() + ".jpg"));
+            obrazekVchodu.setFitHeight(VYSKA_IKONY);
+            obrazekVchodu.setFitWidth(SIRKA_IKONY);
+            obrazekVchodu.setImage(vychodImage);
+
+            vychod.getChildren().addAll(obrazekVchodu, nazevProstoru);
 
             seznamVychodu.getChildren().add(vychod);
             vychod.setOnMouseClicked(event -> {

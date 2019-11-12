@@ -144,6 +144,7 @@ public class Controller {
     private void pridejVychody(Prostor prostor) {
         seznamVychodu.getChildren().clear();
         for (Prostor p : prostor.getVychody()) {
+
             HBox vychod = new HBox();
             vychod.setSpacing(15);
             vychod.setPadding(new Insets(10, 2, 10, 0));
@@ -203,7 +204,25 @@ public class Controller {
      */
     private void pridejPredmetDoMistnosti(Vec vec) {
         Label nazevVeci = new Label(vec.getNazev());
-        seznamPredmetuVMistnosti.getChildren().add(nazevVeci);
+//        seznamPredmetuVMistnosti.getChildren().add(nazevVeci);
+
+        HBox vecBox = new HBox();
+        vecBox.setSpacing(15);
+        vecBox.setPadding(new Insets(10, 2, 10, 0));
+
+        ImageView obrazekVeci = new ImageView();
+
+//        Image vychodImage = new Image(getClass().getResourceAsStream("/" + vec.getNazev() + ".jpg"));
+        Image vychodImage =  new Image(getClass().getResourceAsStream("/" + vec.getNazev() + ".jpg"));
+        obrazekVeci.setFitHeight(VYSKA_IKONY);
+        obrazekVeci.setFitWidth(SIRKA_IKONY);
+        obrazekVeci.setImage(vychodImage);
+
+        vecBox.getChildren().addAll(obrazekVeci, nazevVeci);
+
+        seznamPredmetuVMistnosti.getChildren().add(vecBox);
+
+        
         nazevVeci.setOnMouseClicked(event -> {
             if (vec.isPrenositelna()) {
 

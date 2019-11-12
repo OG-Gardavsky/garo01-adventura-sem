@@ -82,7 +82,7 @@ public class HerniPlan {
         horska_stezka.pridejVec(new Vec("čutora_vody", true));
 
         horsky_pusmyk.pridejVec(new Vec("krabice_nářadí", true));
-        horsky_pusmyk.pridejVec(new Vec("velký kámen", false));
+        horsky_pusmyk.pridejVec(new Vec("velký_kámen", false));
 
         zalesneneUdoli.pridejVec(new Vec("studánka", false));
         zalesneneUdoli.pridejVec(new Vec("cigarety", true));

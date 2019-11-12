@@ -68,7 +68,7 @@ public class Controller {
 
     /**
      * Metoda měmní prostor v grafickém rozhraní
-     * @param prostor
+     * @param prostor slouží k přepnutí do prostoru zadaného v parametru
      */
     private void zmenProstor(Prostor prostor){
         String hlaskaPrikazu =  hra.zpracujPrikaz("plížit " + prostor.getNazev());
@@ -139,7 +139,7 @@ public class Controller {
 
     /***
      * metoda přidá předměty do místnosti v grafickém rozhraní
-     * @param prostor
+     * @param prostor slouží určení východů na základě aktuálního prostoru
      */
     private void pridejVychody(Prostor prostor) {
         seznamVychodu.getChildren().clear();
@@ -167,7 +167,7 @@ public class Controller {
 
     /**
      * Metoda umožní odjet z finální lokace a tím ukončít hru v grafickém rozhraní
-     * @param prostor
+     * @param prostor slouží k ověření, zda už hráč došel do finální lokace
      */
     private void odjetController(Prostor prostor){
         if (prostor.getNazev().equals("stará_V3S")) {
@@ -188,7 +188,7 @@ public class Controller {
 
     /**
      * Metoda pomocí metody pridejPredmetDoMistnosti přidá předměty do místnosti v grafickém rozhraní
-     * @param prostor
+     * @param prostor slouží k určení jaké předměty se mají přidat
      */
     private void pridejPredmety(Prostor prostor) {
         seznamPredmetuVMistnosti.getChildren().clear();
@@ -200,28 +200,22 @@ public class Controller {
 
     /**
      * Metoda přidá věci do místnosti
-     * @param vec
+     * @param vec slouží k určení jaká věc má být přidána
      */
     private void pridejPredmetDoMistnosti(Vec vec) {
         Label nazevVeci = new Label(vec.getNazev());
-//        seznamPredmetuVMistnosti.getChildren().add(nazevVeci);
 
         HBox vecBox = new HBox();
         vecBox.setSpacing(15);
         vecBox.setPadding(new Insets(2, 2, 10, 0));
 
         ImageView obrazekVeci = new ImageView();
-
-//        Image vychodImage = new Image(getClass().getResourceAsStream("/" + vec.getNazev() + ".jpg"));
         Image vychodImage =  new Image(getClass().getResourceAsStream("/" + vec.getNazev() + ".jpg"));
         obrazekVeci.setFitHeight(VYSKA_IKONY);
         obrazekVeci.setFitWidth(SIRKA_IKONY);
         obrazekVeci.setImage(vychodImage);
-
         vecBox.getChildren().addAll(obrazekVeci, nazevVeci);
-
         seznamPredmetuVMistnosti.getChildren().add(vecBox);
-
         
         vecBox.setOnMouseClicked(event -> {
             if (vec.isPrenositelna()) {
@@ -250,6 +244,9 @@ public class Controller {
         });
     }
 
+    /**
+     * metoda vrací uvítací okno s krátkým popisem hry
+     */
     private void vypisUvitaciOkno(){
         Stage stage = new Stage();
         stage.setAlwaysOnTop(true);
@@ -263,7 +260,7 @@ public class Controller {
 
     /**
      * metoda ukončí hru z pohledu grafické nádstavby
-     * @param hlaskaPrikazu
+     * @param hlaskaPrikazu slouží k určení jaká hláška se vrátí v ukončení
      */
     private void ukonciHru(String hlaskaPrikazu){
         seznamVychodu.getChildren().clear();

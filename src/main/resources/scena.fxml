@@ -82,8 +82,7 @@
                 </VBox>
 
                 <!--     odjet           -->
-                <VBox fx:id="testVbox" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
-                    <VBox fx:id="odjetVbox"/>
+                <VBox fx:id="odjetVbox" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
                     <Label fx:id="odjetLabel" styleClass="velky-nadpis"></Label>
                 </VBox>
 

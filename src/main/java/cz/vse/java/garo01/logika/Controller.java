@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 
 public class Controller {
-    public VBox testVbox;
+
     @FXML
     private MenuItem uvitacipolozka;
     @FXML
@@ -76,7 +76,7 @@ public class Controller {
 
         if (!prostor.getNazev().equals("stará_V3S")){
             odjetLabel.setText("");
-            testVbox.setVisible(false);
+            odjetVbox.setVisible(false);
         }
         if (!hra.konecHry()){
             pridejPredmety(prostor);
@@ -150,7 +150,7 @@ public class Controller {
     private void odjetController(Prostor prostor){
         if (prostor.getNazev().equals("stará_V3S")) {
             odjetLabel.setText("Odjet");
-            testVbox.setVisible(true);
+            odjetVbox.setVisible(true);
 
             odjetLabel.setOnMouseClicked(event -> {
                 String hlaskaPrikazu = hra.zpracujPrikaz("odjet");
@@ -186,19 +186,21 @@ public class Controller {
         nazevVeci.setOnMouseClicked(event -> {
             if (vec.isPrenositelna()) {
 
-                hra.zpracujPrikaz("seber " + vec.getNazev());
-                Label vecVBatohu = new Label(vec.getNazev());
                 String hlaskaPrikazu = hra.zpracujPrikaz("seber " + vec.getNazev());
+                Label vecVBatohu = new Label(vec.getNazev());
+
                 Boolean jePlny = false;
 
                 if (hlaskaPrikazu.equals("batoh je plný, nelze nic přidat")){
                     jePlny = true;
+                    sysHlaska.setText(hlaskaPrikazu);
                 }
                 if (jePlny == false){
                     seznamPredmetuVBatohu.getChildren().add(vecVBatohu);
                     seznamPredmetuVMistnosti.getChildren().remove(nazevVeci);
                 }
                 vecVBatohu.setOnMouseClicked(event1 -> {
+                    sysHlaska.setText("");
                     hra.zpracujPrikaz("vyhoď "+vec.getNazev());
                     seznamPredmetuVBatohu.getChildren().remove(vecVBatohu);
                     pridejPredmetDoMistnosti(vec);

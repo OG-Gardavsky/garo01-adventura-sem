@@ -231,20 +231,21 @@ public class Controller {
 
                 Boolean jePlny = false;
 
-                if (hlaskaPrikazu.equals("batoh je plný, nelze nic přidat")){
+                if (hlaskaPrikazu.equals("batoh je plný, nelze nic přidat")) {
                     jePlny = true;
                     sysHlaska.setText(hlaskaPrikazu);
                 }
-                if (jePlny == false){
+                if (jePlny == false) {
                     seznamPredmetuVBatohu.getChildren().add(batohBox);
                     seznamPredmetuVMistnosti.getChildren().remove(batohBox);
+
+                    batohBox.setOnMouseClicked(event1 -> {
+                        sysHlaska.setText("");
+                        hra.zpracujPrikaz("vyhoď " + vec.getNazev());
+                        seznamPredmetuVBatohu.getChildren().remove(batohBox);
+                        pridejPredmetDoMistnosti(vec);
+                    });
                 }
-                batohBox.setOnMouseClicked(event1 -> {
-                    sysHlaska.setText("");
-                    hra.zpracujPrikaz("vyhoď "+vec.getNazev());
-                    seznamPredmetuVBatohu.getChildren().remove(batohBox);
-                    pridejPredmetDoMistnosti(vec);
-                });
             }
         });
     }

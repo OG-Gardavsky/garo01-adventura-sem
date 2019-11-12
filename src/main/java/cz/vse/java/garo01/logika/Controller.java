@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 
 public class Controller {
+    public VBox testVbox;
     @FXML
     private MenuItem uvitacipolozka;
     @FXML
@@ -75,6 +76,7 @@ public class Controller {
 
         if (!prostor.getNazev().equals("stará_V3S")){
             odjetLabel.setText("");
+            testVbox.setVisible(false);
         }
         if (!hra.konecHry()){
             pridejPredmety(prostor);
@@ -148,6 +150,7 @@ public class Controller {
     private void odjetController(Prostor prostor){
         if (prostor.getNazev().equals("stará_V3S")) {
             odjetLabel.setText("Odjet");
+            testVbox.setVisible(true);
 
             odjetLabel.setOnMouseClicked(event -> {
                 String hlaskaPrikazu = hra.zpracujPrikaz("odjet");
@@ -206,6 +209,7 @@ public class Controller {
 
     private void vypisUvitaciOkno(){
         Stage stage = new Stage();
+        stage.setAlwaysOnTop(true);
         stage.setTitle("Uvítání");
         StackPane root = new StackPane();
         Label labelUvitani = new Label(hra.vratUvitani());

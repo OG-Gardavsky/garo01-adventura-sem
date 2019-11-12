@@ -52,8 +52,8 @@ public class Controller {
     @FXML
     private ImageView obrazekLokace;
 
-    public static final int SIRKA_IKONY = 45;
-    public static final int VYSKA_IKONY = 30;
+    public static final int SIRKA_IKONY = 60;
+    public static final int VYSKA_IKONY = 40;
 
 
     public void setHra(IHra hra){

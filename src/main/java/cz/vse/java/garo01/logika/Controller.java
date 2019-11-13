@@ -25,8 +25,6 @@ import javafx.stage.Stage;
 
 public class Controller {
     @FXML
-    private MenuItem testHTml;
-    @FXML
     private MenuItem uvitacipolozka;
     @FXML
     private MenuItem novaHra;

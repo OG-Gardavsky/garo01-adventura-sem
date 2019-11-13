@@ -18,7 +18,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
+import javax.swing.text.html.HTML;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class Controller {
@@ -108,27 +115,28 @@ public class Controller {
             Stage stage = new Stage();
             stage.setTitle("Nápověda");
             StackPane root = new StackPane();
-            String textNapovedy = hra.zpracujPrikaz("nápověda");
-            Label labelNapovedy = new Label(textNapovedy);
-            root.getChildren().add(labelNapovedy);
-            stage.setScene(new Scene(root, 854, 480));
+
+            WebView browser = new WebView();
+            WebEngine webEngine = browser.getEngine();
+            webEngine.load(getClass().getResource("/index.html").toString());
+            root.getChildren().add(browser);
+
+            stage.setScene(new Scene(root, 350, 200));
             stage.show();
         });
 
-//        testHTml.setOnAction( event -> {
-//            Stage stage = new Stage();
-//            stage.setTitle("Nápověda");
-//            StackPane root = new StackPane();
-//
-//
-//        });
 
         mapa.setOnAction(event -> {
             Stage stage = new Stage();
-            Image image = new Image(getClass().getResourceAsStream("/mapa.png"));
-            ImageView mapa = new ImageView();
-            mapa.setImage(image);
+            stage.setTitle("Mapa hry");
+            StackPane root = new StackPane();
 
+            WebView browser = new WebView();
+            WebEngine webEngine = browser.getEngine();
+            webEngine.load(getClass().getResource("/mapa.html").toString());
+            root.getChildren().add(browser);
+
+            stage.setScene(new Scene(root, 650, 800));
             stage.show();
         });
 
@@ -250,11 +258,15 @@ public class Controller {
     private void vypisUvitaciOkno(){
         Stage stage = new Stage();
         stage.setAlwaysOnTop(true);
-        stage.setTitle("Uvítání");
+        stage.setTitle("Uvítací okno");
         StackPane root = new StackPane();
-        Label labelUvitani = new Label(hra.vratUvitani());
-        root.getChildren().add(labelUvitani);
-        stage.setScene(new Scene(root, 854, 360));
+
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        webEngine.load(getClass().getResource("/uvitani.html").toString());
+        root.getChildren().add(browser);
+
+        stage.setScene(new Scene(root, 640, 360));
         stage.show();
     }
 

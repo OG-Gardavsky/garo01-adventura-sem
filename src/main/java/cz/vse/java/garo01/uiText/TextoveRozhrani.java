@@ -44,6 +44,7 @@ public class TextoveRozhrani {
         }
 
         System.out.println(hra.vratEpilog());
+        hra.konecHry();
     }
 
     /**
@@ -81,6 +82,7 @@ public class TextoveRozhrani {
             }
 
             System.out.println(hra.vratEpilog());
+            hra.konecHry();
 
           //uprava hlaseni
         }

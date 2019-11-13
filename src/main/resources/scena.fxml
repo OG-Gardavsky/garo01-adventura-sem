@@ -1,27 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="cz.vse.java.garo01.logika.Controller"
-            prefHeight="400.0" prefWidth="600.0"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="cz.vse.java.garo01.logika.Controller"
+           prefHeight="576" prefWidth="1023"
            stylesheets="/styly.css"
             >
+    <ImageView fx:id="obrazekLokace" />
     <BorderPane>
+        <top>
+            <MenuBar>
+                <Menu text="menu">
+                    <MenuItem fx:id="novaHra" text="Nová Hra"/>
+                    <MenuItem fx:id="napoveda" text="Nápověda"/>
+                    <MenuItem fx:id="mapa" text="Mapa hry"/>
+                    <MenuItem fx:id="uvitacipolozka" text="Uvítání"/>
+                </Menu>
+            </MenuBar>
+        </top>
+
         <bottom>
             <VBox alignment="CENTER" styleClass="kontejner">
-                <Label fx:id="jmenoLokace" styleClass="velky-nadpis"/>
-                <Label fx:id="popisLokace" styleClass="nadpis"/>
+                <Label fx:id="jmenoLokace" styleClass="velky-nadpis" text="Jmeno lokace"/>
+                <Label fx:id="popisLokace" styleClass="nadpis" text="popis lokace"/>
+                <Label fx:id="sysHlaska" styleClass="nadpis"/>
             </VBox>
         </bottom>
-        <right>
 
+        <left>
+            <GridPane vgap="10">
+                <rowConstraints>
+                    <RowConstraints percentHeight="50"/>
+                    <RowConstraints percentHeight="50"/>
+                </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="200"/>
+                </columnConstraints>
+                <padding>
+                    <Insets top="10" bottom="10" left="10" right="10"/>
+                </padding>
+
+                <!--     Predmety           -->
+                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
+                    <Label text="Předměty" styleClass="nadpis"/>
+                    <VBox fx:id="seznamPredmetuVMistnosti"/>
+                </VBox>
+
+                <!--     Batoh           -->
+                <VBox  GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
+                    <Label text="Batoh" styleClass="nadpis"/>
+                    <VBox fx:id="seznamPredmetuVBatohu"/>
+                </VBox>
+            </GridPane>
+        </left>
+
+        <right>
+            <GridPane vgap="10">
+                <rowConstraints>
+                    <RowConstraints percentHeight="50"/>
+                    <RowConstraints percentHeight="50"/>
+                </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="250"/>
+                </columnConstraints>
+                <padding>
+                    <Insets top="10" bottom="10" left="10" right="10"/>
+                </padding>
+
+                <!--     jít do          -->
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="kontejner">
+                    <Label text="Jít do" styleClass="nadpis"/>
+                    <VBox fx:id="seznamVychodu"/>
+                </VBox>
+
+                <!--     odjet           -->
+                <VBox fx:id="odjetVbox" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
+                    <Label fx:id="odjetLabel" styleClass="velky-nadpis"></Label>
+                </VBox>
+
+
+            </GridPane>
         </right>
+
+
     </BorderPane>
 
 </StackPane>

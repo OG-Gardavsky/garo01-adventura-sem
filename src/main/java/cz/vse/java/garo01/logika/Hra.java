@@ -38,8 +38,8 @@ public class Hra implements IHra {
      *  Vrátí úvodní zprávu pro hráče.
      */
     public String vratUvitani() {
-        return "Praporčík Petr Urban se probudil ve světě obráceném naruby.Rychle si však uvědomil že visí v sedadle sestřelené helikoptéry a celé tělo ho bolí jako čert.\n" +  " Rozhlédl se kolem sebe, avšak marně protože neviděl nic než tmu „Lepší než světlo…“ pomyslel si,\n" +  " když si uvědomil jak hořlavé palivo v helikoptérách bývá. „Hej, jste v pořádku?!“ zakřičel na vojáky co letěli s ním, nedostalo se mu však žádné odpovědi. \n \n" +
-                "Takto začal původně obyčejný den obyčejného československého vojáka, daleko od své rodné krajiny v  pohoří Hindukuš v Afganistánu.\n" + "Okolo zuří konflikt a náš protagonista se musí dostat do bezpečí své původní destinace, základny Krasnaja Skala \n \n" +
+        return "Praporčík Petr Urban se probudil ve světě obráceném naruby.Rychle si však uvědomil že visí v sedadle sestřelené helikoptéry\n" + "a celé tělo ho bolí jako čert.\n" +  " Rozhlédl se kolem sebe, avšak marně protože neviděl nic než tmu „Lepší než světlo…“ pomyslel si,\n" +  " když si uvědomil jak hořlavé palivo v helikoptérách bývá. „Hej, jste v pořádku?!“ zakřičel na vojáky co letěli s ním,\n" + "nedostalo se mu však žádné odpovědi. \n \n" +
+                "Takto začal původně obyčejný den obyčejného československého vojáka, daleko od své rodné krajiny v  pohoří Hindukuš \n" +  "v Afganistánu." + "Okolo zuří konflikt a náš protagonista se musí dostat do bezpečí své původní destinace, základny Krasnaja Skala \n \n" +
                herniPlan.getAktualniProstor().dlouhyPopis() + "\n";
     }
     
@@ -103,6 +103,7 @@ public class Hra implements IHra {
      public HerniPlan getHerniPlan(){
         return herniPlan;
      }
+
     
 }
 

@@ -22,11 +22,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import javax.swing.text.html.HTML;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 
 public class Controller {
     @FXML
@@ -118,7 +113,7 @@ public class Controller {
 
             WebView browser = new WebView();
             WebEngine webEngine = browser.getEngine();
-            webEngine.load(getClass().getResource("/index.html").toString());
+            webEngine.load(getClass().getResource("/html/index.html").toString());
             root.getChildren().add(browser);
 
             stage.setScene(new Scene(root, 350, 200));
@@ -133,7 +128,7 @@ public class Controller {
 
             WebView browser = new WebView();
             WebEngine webEngine = browser.getEngine();
-            webEngine.load(getClass().getResource("/mapa.html").toString());
+            webEngine.load(getClass().getResource("/html/mapa.html").toString());
             root.getChildren().add(browser);
 
             stage.setScene(new Scene(root, 650, 800));
@@ -218,7 +213,7 @@ public class Controller {
         vecBox.setPadding(new Insets(2, 2, 10, 0));
 
         ImageView obrazekVeci = new ImageView();
-        Image vychodImage =  new Image(getClass().getResourceAsStream("/" + vec.getNazev() + ".jpg"));
+        Image vychodImage =  new Image(getClass().getResourceAsStream("/predmety/" + vec.getNazev() + ".jpg"));
         obrazekVeci.setFitHeight(VYSKA_IKONY);
         obrazekVeci.setFitWidth(SIRKA_IKONY);
         obrazekVeci.setImage(vychodImage);
@@ -263,7 +258,7 @@ public class Controller {
 
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
-        webEngine.load(getClass().getResource("/uvitani.html").toString());
+        webEngine.load(getClass().getResource("/html/uvitani.html").toString());
         root.getChildren().add(browser);
 
         stage.setScene(new Scene(root, 640, 360));

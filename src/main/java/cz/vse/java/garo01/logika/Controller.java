@@ -1,12 +1,5 @@
 package cz.vse.java.garo01.logika;
 
-/**
- * Tato třídá slouží k ovládání grafické verze jednoduché grafické adventury
- * toto rozšíření bylo vytvořeno v akademickém roce zimním semestru 2019 pro předmět 4IT115
- * část kódu je převzata ze cvičení od pana Růžičky
- * @author: Ondřej Gardavský
- */
-
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -23,6 +16,12 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 
+/**
+ * Tato třídá slouží k ovládání grafické verze jednoduché grafické adventury
+ * toto rozšíření bylo vytvořeno v akademickém roce zimním semestru 2019 pro předmět 4IT115
+ * část kódu je převzata ze cvičení od pana Růžičky
+ * @author: Ondřej Gardavský
+ */
 public class Controller {
     @FXML
     private MenuItem uvitacipolozka;
@@ -52,8 +51,8 @@ public class Controller {
     @FXML
     private ImageView obrazekLokace;
 
-    public static final int SIRKA_IKONY = 48;
-    public static final int VYSKA_IKONY = 32;
+    private static final int SIRKA_IKONY = 48;
+    private static final int VYSKA_IKONY = 32;
 
 
     public void setHra(IHra hra){
@@ -133,9 +132,7 @@ public class Controller {
             stage.show();
         });
 
-        uvitacipolozka.setOnAction(event -> {
-            vypisUvitaciOkno();
-        });
+        uvitacipolozka.setOnAction(event -> vypisUvitaciOkno());
     }
 
     /***
@@ -152,7 +149,7 @@ public class Controller {
             Label nazevProstoru = new Label(p.getNazev());
 
             ImageView obrazekVchodu = new ImageView();
-            Image vychodImage = new Image(getClass().getClassLoader().getResourceAsStream("\\" + p.getNazev() + ".jpg"));
+            Image vychodImage = new Image(getClass().getResourceAsStream("/" + p.getNazev() + ".jpg"));
             obrazekVchodu.setFitHeight(VYSKA_IKONY);
             obrazekVchodu.setFitWidth(SIRKA_IKONY);
             obrazekVchodu.setImage(vychodImage);
@@ -160,9 +157,7 @@ public class Controller {
             vychod.getChildren().addAll(obrazekVchodu, nazevProstoru);
 
             seznamVychodu.getChildren().add(vychod);
-            vychod.setOnMouseClicked(event -> {
-                zmenProstor(p);
-            });
+            vychod.setOnMouseClicked(event -> zmenProstor(p));
         }
     }
 
@@ -177,7 +172,8 @@ public class Controller {
 
             odjetLabel.setOnMouseClicked(event -> {
                 String hlaskaPrikazu = hra.zpracujPrikaz("odjet");
-                if (hra.konecHry() == true){
+
+                if (hra.konecHry()){
                     ukonciHru(hlaskaPrikazu);
                 } else {
                     sysHlaska.setText(hlaskaPrikazu);
@@ -221,22 +217,21 @@ public class Controller {
             if (vec.isPrenositelna()) {
 
                 String hlaskaPrikazu = hra.zpracujPrikaz("seber " + vec.getNazev());
-                HBox batohBox = vecBox;
 
-                Boolean jePlny = false;
+                boolean jePlny = false;
 
                 if (hlaskaPrikazu.equals("batoh je plný, nelze nic přidat")) {
                     jePlny = true;
                     sysHlaska.setText(hlaskaPrikazu);
                 }
-                if (jePlny == false) {
-                    seznamPredmetuVBatohu.getChildren().add(batohBox);
-                    seznamPredmetuVMistnosti.getChildren().remove(batohBox);
+                if (!jePlny) {
+                    seznamPredmetuVBatohu.getChildren().add(vecBox);
+                    seznamPredmetuVMistnosti.getChildren().remove(vecBox);
 
-                    batohBox.setOnMouseClicked(event1 -> {
+                    vecBox.setOnMouseClicked(event1 -> {
                         sysHlaska.setText("");
                         hra.zpracujPrikaz("vyhoď " + vec.getNazev());
-                        seznamPredmetuVBatohu.getChildren().remove(batohBox);
+                        seznamPredmetuVBatohu.getChildren().remove(vecBox);
                         pridejPredmetDoMistnosti(vec);
                     });
                 }

@@ -147,7 +147,9 @@ public class Controller {
             HBox vychod = new HBox();
             vychod.setSpacing(15);
             vychod.setPadding(new Insets(10, 2, 10, 0));
-            Label nazevProstoru = new Label(p.getNazev());
+            //Label nazevProstoru = new Label(p.getNazev());
+            Button nazevProstoru = new Button();
+            nazevProstoru.setText(p.getNazev());
 
             ImageView obrazekVchodu = new ImageView();
             Image vychodImage = new Image(getClass().getResourceAsStream("/" + p.getNazev() + ".jpg"));
@@ -158,7 +160,7 @@ public class Controller {
             vychod.getChildren().addAll(obrazekVchodu, nazevProstoru);
 
             seznamVychodu.getChildren().add(vychod);
-            vychod.setOnMouseClicked(event -> zmenProstor(p));
+            nazevProstoru.setOnMouseClicked(event -> zmenProstor(p));
         }
     }
 

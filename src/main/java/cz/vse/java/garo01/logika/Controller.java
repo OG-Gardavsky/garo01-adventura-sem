@@ -4,6 +4,7 @@ package cz.vse.java.garo01.logika;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -32,8 +33,6 @@ public class Controller {
     @FXML
     private MenuItem mapa;
     @FXML
-    private Label odjetLabel;
-    @FXML
     private VBox odjetVbox;
     @FXML
     private VBox seznamPredmetuVMistnosti;
@@ -50,6 +49,8 @@ public class Controller {
     private IHra hra;
     @FXML
     private ImageView obrazekLokace;
+    @FXML
+    private Button odjetButton;
 
     private static final int SIRKA_IKONY = 48;
     private static final int VYSKA_IKONY = 32;
@@ -59,7 +60,6 @@ public class Controller {
         this.hra = hra;
         seznamPredmetuVBatohu.getChildren().clear();
         HerniPlan herniPlan = hra.getHerniPlan();
-        odjetLabel.setText("");
         Prostor aktualniProstor = herniPlan.getAktualniProstor();
         zmenProstor(aktualniProstor);
         vypisUvitaciOkno();
@@ -80,7 +80,6 @@ public class Controller {
         sysHlaska.setText("");
 
         if (!prostor.getNazev().equals("stará_V3S")){
-            odjetLabel.setText("");
             odjetVbox.setVisible(false);
         }
         if (!hra.konecHry()){
@@ -105,6 +104,7 @@ public class Controller {
 
         napoveda.setOnAction(event -> {
             Stage stage = new Stage();
+            stage.setAlwaysOnTop(true);
             stage.setTitle("Nápověda");
             StackPane root = new StackPane();
 
@@ -120,6 +120,7 @@ public class Controller {
 
         mapa.setOnAction(event -> {
             Stage stage = new Stage();
+            stage.setAlwaysOnTop(true);
             stage.setTitle("Mapa hry");
             StackPane root = new StackPane();
 
@@ -146,7 +147,9 @@ public class Controller {
             HBox vychod = new HBox();
             vychod.setSpacing(15);
             vychod.setPadding(new Insets(10, 2, 10, 0));
-            Label nazevProstoru = new Label(p.getNazev());
+            //Label nazevProstoru = new Label(p.getNazev());
+            Button nazevProstoru = new Button();
+            nazevProstoru.setText(p.getNazev());
 
             ImageView obrazekVchodu = new ImageView();
             Image vychodImage = new Image(getClass().getResourceAsStream("/" + p.getNazev() + ".jpg"));
@@ -157,7 +160,7 @@ public class Controller {
             vychod.getChildren().addAll(obrazekVchodu, nazevProstoru);
 
             seznamVychodu.getChildren().add(vychod);
-            vychod.setOnMouseClicked(event -> zmenProstor(p));
+            nazevProstoru.setOnMouseClicked(event -> zmenProstor(p));
         }
     }
 
@@ -167,10 +170,9 @@ public class Controller {
      */
     private void odjetController(Prostor prostor){
         if (prostor.getNazev().equals("stará_V3S")) {
-            odjetLabel.setText("Odjet");
             odjetVbox.setVisible(true);
 
-            odjetLabel.setOnMouseClicked(event -> {
+            odjetButton.setOnMouseClicked(event -> {
                 String hlaskaPrikazu = hra.zpracujPrikaz("odjet");
 
                 if (hra.konecHry()){
@@ -199,7 +201,10 @@ public class Controller {
      * @param vec slouží k určení jaká věc má být přidána
      */
     private void pridejPredmetDoMistnosti(Vec vec) {
-        Label nazevVeci = new Label(vec.getNazev());
+        //Label nazevVeci = new Label(vec.getNazev());
+        //nazevVeci.getStyleClass().add("/styly.css");
+        Button klikaciPolozka = new Button();
+        klikaciPolozka.setText(vec.getNazev());
 
         HBox vecBox = new HBox();
         vecBox.setSpacing(15);
@@ -210,10 +215,10 @@ public class Controller {
         obrazekVeci.setFitHeight(VYSKA_IKONY);
         obrazekVeci.setFitWidth(SIRKA_IKONY);
         obrazekVeci.setImage(vychodImage);
-        vecBox.getChildren().addAll(obrazekVeci, nazevVeci);
+        vecBox.getChildren().addAll(obrazekVeci, klikaciPolozka);
         seznamPredmetuVMistnosti.getChildren().add(vecBox);
         
-        vecBox.setOnMouseClicked(event -> {
+        klikaciPolozka.setOnMouseClicked(event -> {
             if (vec.isPrenositelna()) {
 
                 String hlaskaPrikazu = hra.zpracujPrikaz("seber " + vec.getNazev());
@@ -228,7 +233,7 @@ public class Controller {
                     seznamPredmetuVBatohu.getChildren().add(vecBox);
                     seznamPredmetuVMistnosti.getChildren().remove(vecBox);
 
-                    vecBox.setOnMouseClicked(event1 -> {
+                    klikaciPolozka.setOnMouseClicked(event1 -> {
                         sysHlaska.setText("");
                         hra.zpracujPrikaz("vyhoď " + vec.getNazev());
                         seznamPredmetuVBatohu.getChildren().remove(vecBox);

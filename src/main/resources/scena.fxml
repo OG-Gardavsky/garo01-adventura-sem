@@ -5,6 +5,7 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="cz.vse.java.garo01.logika.Controller"
@@ -78,14 +79,23 @@
                     <VBox fx:id="seznamVychodu"/>
                 </VBox>
 
-                <!--     odjet           -->
-                <VBox fx:id="odjetVbox" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
-                    <Label fx:id="odjetLabel" styleClass="velky-nadpis"></Label>
-                </VBox>
-
 
             </GridPane>
         </right>
+
+
+        <center>
+            <VBox fx:id="odjetVbox" alignment="CENTER" >
+
+
+                <Button fx:id="odjetButton" text="Odjet" prefHeight="60.0" prefWidth="118.0" >
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                </Button>
+            </VBox>
+
+        </center>
 
 
     </BorderPane>

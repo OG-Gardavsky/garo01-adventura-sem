@@ -199,8 +199,10 @@ public class Controller {
      * @param vec slouží k určení jaká věc má být přidána
      */
     private void pridejPredmetDoMistnosti(Vec vec) {
-        Label nazevVeci = new Label(vec.getNazev());
-        nazevVeci.getStyleClass().add("/styly.css");
+        //Label nazevVeci = new Label(vec.getNazev());
+        //nazevVeci.getStyleClass().add("/styly.css");
+        Button klikaciPolozka = new Button();
+        klikaciPolozka.setText(vec.getNazev());
 
         HBox vecBox = new HBox();
         vecBox.setSpacing(15);
@@ -211,10 +213,10 @@ public class Controller {
         obrazekVeci.setFitHeight(VYSKA_IKONY);
         obrazekVeci.setFitWidth(SIRKA_IKONY);
         obrazekVeci.setImage(vychodImage);
-        vecBox.getChildren().addAll(obrazekVeci, nazevVeci);
+        vecBox.getChildren().addAll(obrazekVeci, klikaciPolozka);
         seznamPredmetuVMistnosti.getChildren().add(vecBox);
         
-        vecBox.setOnMouseClicked(event -> {
+        klikaciPolozka.setOnMouseClicked(event -> {
             if (vec.isPrenositelna()) {
 
                 String hlaskaPrikazu = hra.zpracujPrikaz("seber " + vec.getNazev());
@@ -229,7 +231,7 @@ public class Controller {
                     seznamPredmetuVBatohu.getChildren().add(vecBox);
                     seznamPredmetuVMistnosti.getChildren().remove(vecBox);
 
-                    vecBox.setOnMouseClicked(event1 -> {
+                    klikaciPolozka.setOnMouseClicked(event1 -> {
                         sysHlaska.setText("");
                         hra.zpracujPrikaz("vyhoď " + vec.getNazev());
                         seznamPredmetuVBatohu.getChildren().remove(vecBox);

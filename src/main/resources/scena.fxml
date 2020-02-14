@@ -81,6 +81,8 @@
                 <!--     odjet           -->
                 <VBox fx:id="odjetVbox" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="kontejner">
                     <Label fx:id="odjetLabel" styleClass="velky-nadpis"></Label>
+
+                    <Button fx:id="odjetButton" text="Odjet" prefHeight="30" prefWidth="20" ></Button>
                 </VBox>
 
 

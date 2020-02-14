@@ -4,6 +4,7 @@ package cz.vse.java.garo01.logika;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -50,6 +51,8 @@ public class Controller {
     private IHra hra;
     @FXML
     private ImageView obrazekLokace;
+    @FXML
+    private Button odjetButton;
 
     private static final int SIRKA_IKONY = 48;
     private static final int VYSKA_IKONY = 32;
@@ -80,7 +83,7 @@ public class Controller {
         sysHlaska.setText("");
 
         if (!prostor.getNazev().equals("stará_V3S")){
-            odjetLabel.setText("");
+            //odjetLabel.setText("");
             odjetVbox.setVisible(false);
         }
         if (!hra.konecHry()){
@@ -170,7 +173,7 @@ public class Controller {
             odjetLabel.setText("Odjet");
             odjetVbox.setVisible(true);
 
-            odjetLabel.setOnMouseClicked(event -> {
+            odjetButton.setOnMouseClicked(event -> {
                 String hlaskaPrikazu = hra.zpracujPrikaz("odjet");
                 System.out.println(hra.konecHry());
                 if (hra.konecHry()){
@@ -200,6 +203,7 @@ public class Controller {
      */
     private void pridejPredmetDoMistnosti(Vec vec) {
         Label nazevVeci = new Label(vec.getNazev());
+        nazevVeci.getStyleClass().add("/styly.css");
 
         HBox vecBox = new HBox();
         vecBox.setSpacing(15);

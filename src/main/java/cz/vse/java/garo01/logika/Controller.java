@@ -172,7 +172,7 @@ public class Controller {
 
             odjetButton.setOnMouseClicked(event -> {
                 String hlaskaPrikazu = hra.zpracujPrikaz("odjet");
-                System.out.println(hra.konecHry());
+
                 if (hra.konecHry()){
                     ukonciHru(hlaskaPrikazu);
                 } else {

@@ -33,8 +33,6 @@ public class Controller {
     @FXML
     private MenuItem mapa;
     @FXML
-    private Label odjetLabel;
-    @FXML
     private VBox odjetVbox;
     @FXML
     private VBox seznamPredmetuVMistnosti;
@@ -62,7 +60,6 @@ public class Controller {
         this.hra = hra;
         seznamPredmetuVBatohu.getChildren().clear();
         HerniPlan herniPlan = hra.getHerniPlan();
-        odjetLabel.setText("");
         Prostor aktualniProstor = herniPlan.getAktualniProstor();
         zmenProstor(aktualniProstor);
         vypisUvitaciOkno();
@@ -83,7 +80,6 @@ public class Controller {
         sysHlaska.setText("");
 
         if (!prostor.getNazev().equals("stará_V3S")){
-            //odjetLabel.setText("");
             odjetVbox.setVisible(false);
         }
         if (!hra.konecHry()){
@@ -108,6 +104,7 @@ public class Controller {
 
         napoveda.setOnAction(event -> {
             Stage stage = new Stage();
+            stage.setAlwaysOnTop(true);
             stage.setTitle("Nápověda");
             StackPane root = new StackPane();
 
@@ -123,6 +120,7 @@ public class Controller {
 
         mapa.setOnAction(event -> {
             Stage stage = new Stage();
+            stage.setAlwaysOnTop(true);
             stage.setTitle("Mapa hry");
             StackPane root = new StackPane();
 
@@ -170,7 +168,6 @@ public class Controller {
      */
     private void odjetController(Prostor prostor){
         if (prostor.getNazev().equals("stará_V3S")) {
-            odjetLabel.setText("Odjet");
             odjetVbox.setVisible(true);
 
             odjetButton.setOnMouseClicked(event -> {
